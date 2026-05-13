@@ -21,7 +21,7 @@ jobs:
       - name: Publish
         run: dotnet publish -c Release -o release
       - name: Fix base href
-        run: sed -i 's/<base href="\/" \/>/<base href="\/My_Portfolio\/" \/>/g' release/wwwroot/index.html
+        run: sed -i 's/<base href="\/" \/>/<base href="\/" \/>/g' release/wwwroot/index.html
       - name: Copy index to 404
         run: cp release/wwwroot/index.html release/wwwroot/404.html
       - name: Upload artifact
