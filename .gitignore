@@ -1,5 +1,7 @@
 bin/
 obj/
+artifacts/
+dist/
 
 .vs/
 .vscode/
@@ -7,3 +9,4 @@ obj/
 *.user
 *.suo
 *.cache
+*.lscache

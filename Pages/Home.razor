@@ -1,0 +1,180 @@
+@page "/"
+@inject IJSRuntime JS
+
+<PageTitle>Rati Kotchuashvili | Portfolio</PageTitle>
+
+<header id="floatingHeader" class="site-header">Rati Kotchuashvili</header>
+
+<main class="sphere-page">
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-left">
+                <p class="hero-kicker">Portfolio</p>
+                <h1 class="hero-title">Creative developer building polished web experiences.</h1>
+                <p class="hero-description">
+                    I am Rati Kotchuashvili, a computer science student focused on C#, .NET, Blazor,
+                    and frontend experiences that feel clean, interactive, and intentional.
+                </p>
+                <div class="hero-links">
+                    <button class="hero-link hero-link-primary" type="button" @onclick="ContactMeAsync">Contact Me</button>
+                    <a class="hero-link" href="https://github.com/rraattiii" target="_blank" rel="noreferrer noopener">GitHub</a>
+                    <button class="hero-link" type="button" @onclick="OpenLinkedInAsync">LinkedIn</button>
+                </div>
+                <p class="hero-contact-status" aria-live="polite">@contactStatus</p>
+            </div>
+
+            <div class="hero-right">
+                <section class="hero-info-card" aria-label="Profile summary">
+                    <p class="hero-label">Now Building</p>
+                    <h2 class="hero-info-title">Blazor and .NET portfolio work</h2>
+
+                    <div class="hero-profile-list">
+                        <div class="hero-profile-item">
+                            <span class="hero-profile-key">Location</span>
+                            <span class="hero-profile-value">Tbilisi, Georgia</span>
+                        </div>
+                        <div class="hero-profile-item">
+                            <span class="hero-profile-key">Education</span>
+                            <span class="hero-profile-value">IBSU, Computer Science</span>
+                        </div>
+                        <div class="hero-profile-item">
+                            <span class="hero-profile-key">Focus</span>
+                            <span class="hero-profile-value">Frontend engineering, C#, and modern web UI</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-tags">
+                        <span class="hero-tag">C#</span>
+                        <span class="hero-tag">.NET</span>
+                        <span class="hero-tag">Blazor</span>
+                        <span class="hero-tag">JavaScript</span>
+                        <span class="hero-tag">CSS</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects-section" aria-labelledby="projectsTitle">
+        <div class="projects-shell">
+            <div class="projects-intro">
+                <p class="projects-kicker">Selected Work</p>
+                <h2 id="projectsTitle" class="projects-title">Projects that show how I build across frontend, backend, and product polish.</h2>
+                <p class="projects-description">
+                    I like projects that balance visual clarity, practical implementation, and clean engineering.
+                    These are the kinds of builds I want to keep pushing further.
+                </p>
+            </div>
+
+            <div class="projects-grid">
+                <article class="project-card">
+                    <p class="project-type">Blazor / C#</p>
+                    <h3 class="project-name">Interactive Portfolio Experience</h3>
+                    <p class="project-copy">
+                        A custom portfolio built with Blazor, canvas animation, and JavaScript-driven interaction.
+                        The focus is on motion, presentation, and a more memorable browsing experience.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">Blazor</span>
+                        <span class="project-tag">C#</span>
+                        <span class="project-tag">JavaScript</span>
+                        <span class="project-tag">Canvas</span>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <p class="project-type">Web App</p>
+                    <h3 class="project-name">Responsive University Projects</h3>
+                    <p class="project-copy">
+                        Built responsive web applications using Angular, PHP, HTML, and CSS with a focus on
+                        frontend components, backend logic, and clear client-server communication.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">Angular</span>
+                        <span class="project-tag">PHP</span>
+                        <span class="project-tag">HTML</span>
+                        <span class="project-tag">CSS</span>
+                    </div>
+                </article>
+
+                <article class="project-card project-card-featured">
+                    <p class="project-type">CS Foundation</p>
+                    <h3 class="project-name">Academic Software Builds</h3>
+                    <p class="project-copy">
+                        Coursework and personal builds in C, C++, and C# that strengthened my understanding of
+                        algorithms, object-oriented design, debugging, and implementation discipline.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">C</span>
+                        <span class="project-tag">C++</span>
+                        <span class="project-tag">C#</span>
+                        <span class="project-tag">OOP</span>
+                    </div>
+                </article>
+            </div>
+
+            <div class="projects-actions">
+                <a class="projects-action projects-action-primary" href="https://github.com/rraattiii" target="_blank" rel="noreferrer noopener">View GitHub</a>
+                <button class="projects-action" type="button" @onclick="ContactMeAsync">Start a Conversation</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="sphere-body" aria-label="Interactive portfolio content">
+        <aside class="about-panel" aria-live="polite">
+            <div class="about-panel-inner">
+                <div class="about-panel-content">
+                    <h2 id="sectionTitle" class="about-label is-visible">About me</h2>
+                    <p id="sectionText" class="about-text is-visible">
+                        I am a web developer passionate about building immersive websites and clean digital
+                        experiences. My work is focused on strong visuals, smooth motion, and modern interactions.
+                    </p>
+                    <div id="contactLinks" class="contact-links is-visible"></div>
+                </div>
+            </div>
+        </aside>
+
+        <div class="sphere-container" aria-hidden="true">
+            <canvas id="sphereCanvas"></canvas>
+        </div>
+
+        <div id="cloudPopup" class="cloud-popup" role="dialog" aria-modal="true" aria-labelledby="cloudPopupTitle">
+            <div class="cloud-popup-card">
+                <button id="cloudPopupClose" class="cloud-popup-close" type="button">Close</button>
+                <p id="cloudPopupKicker" class="cloud-popup-kicker">Portfolio detail</p>
+                <h2 id="cloudPopupTitle" class="cloud-popup-title">About me</h2>
+                <p id="cloudPopupText" class="cloud-popup-text">
+                    Select a floating label in the sphere to explore more details.
+                </p>
+            </div>
+        </div>
+
+        <div class="scroll-space" aria-hidden="true"></div>
+    </section>
+</main>
+
+@code {
+    private const string EmailAddress = "rati.rati2004@gmail.com";
+    private string contactStatus = string.Empty;
+
+    private async Task ContactMeAsync()
+    {
+        contactStatus = string.Empty;
+        await JS.InvokeVoidAsync("open", $"mailto:{EmailAddress}?subject=Portfolio%20Contact", "_self");
+
+        try
+        {
+            await JS.InvokeVoidAsync("navigator.clipboard.writeText", EmailAddress);
+            contactStatus = $"Email copied: {EmailAddress}";
+        }
+        catch
+        {
+            contactStatus = $"Email: {EmailAddress}";
+        }
+    }
+
+    private async Task OpenLinkedInAsync()
+    {
+        await JS.InvokeVoidAsync("open", "https://www.linkedin.com/in/rati-kotchuashvili-3a98582a3/", "_blank", "noopener,noreferrer");
+    }
+}

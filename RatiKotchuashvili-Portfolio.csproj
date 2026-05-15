@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>RatiKotchuashvili_Portfolio</RootNamespace>
+    <IntermediateOutputPath>artifacts\obj\$(Configuration)\$(TargetFramework)\</IntermediateOutputPath>
+    <DebuggerSupport>false</DebuggerSupport>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.0" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="css\**\*"
+             Link="wwwroot\css\%(RecursiveDir)%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
+    <Content Update="lib\**\*"
+             Link="wwwroot\lib\%(RecursiveDir)%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
+    <Content Update="cv\**\*"
+             Link="wwwroot\cv\%(RecursiveDir)%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
+    <Content Update="sample-data\**\*"
+             Link="wwwroot\sample-data\%(RecursiveDir)%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
+    <Content Update="scroll-rotate.js"
+             Link="wwwroot\scroll-rotate.js"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
+    <Content Update="favicon.png"
+             Link="wwwroot\favicon.png"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
+    <Content Update="icon-192.png"
+             Link="wwwroot\icon-192.png"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
+    <Content Update="RatiKotchuashvili-Portfolio.styles.css"
+             Link="wwwroot\RatiKotchuashvili-Portfolio.styles.css"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
