@@ -136,7 +136,7 @@
     let sectionTextElement = null;
     let contactLinksElement = null;
     let floatingHeaderElement = null;
-    let currentDisplayTitle = sections[0].title;
+    let currentDisplayTitle = (sections && sections.length > 0) ? sections[0].title : "Loading...";
     let currentDisplayText = sections[0].text;
     let currentDisplayLinks = [];
     let currentDisplayLabels = sections[0].labels;
