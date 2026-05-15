@@ -768,32 +768,75 @@ a {
 }
 
 @media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+
     .site-header {
-        left: 20px;
-        top: 20px;
-        letter-spacing: 0.12em;
+        left: 18px;
+        top: 16px;
+        right: 18px;
+        font-size: 0.8rem;
+        letter-spacing: 0.1em;
     }
 
     .site-header.is-panel {
-        left: 32px;
-        top: 30px;
+        left: 18px;
+        top: 16px;
+        font-size: 0.8rem;
+        letter-spacing: 0.1em;
     }
 
     .hero-section {
-        padding: 100px 20px 40px;
+        min-height: auto;
+        padding: 84px 18px 32px;
     }
 
     .hero-content {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 24px;
+    }
+
+    .hero-left {
+        gap: 18px;
+    }
+
+    .hero-title {
+        font-size: clamp(2.1rem, 10vw, 2.9rem);
+        line-height: 1.08;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+        line-height: 1.7;
+        max-width: none;
     }
 
     .hero-links {
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .hero-link {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 18px;
+        border-radius: 14px;
+    }
+
+    .hero-info-card {
+        max-width: none;
+        padding: 24px 20px;
+        border-radius: 24px;
+    }
+
+    .hero-profile-value {
+        font-size: 0.96rem;
     }
 
     .projects-section {
-        padding: 0 20px 90px;
+        padding: 0 18px 56px;
     }
 
     .projects-shell {
@@ -805,24 +848,94 @@ a {
         grid-template-columns: 1fr;
     }
 
+    .projects-title {
+        font-size: clamp(1.75rem, 8vw, 2.4rem);
+    }
+
+    .projects-description,
+    .project-copy {
+        font-size: 0.96rem;
+        line-height: 1.7;
+    }
+
+    .project-card {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .projects-actions {
+        flex-direction: column;
+    }
+
+    .projects-action {
+        width: 100%;
+        padding: 14px 18px;
+    }
+
+    .sphere-body,
+    .sphere-page {
+        min-height: auto;
+    }
+
+    .sphere-body {
+        padding: 0 18px 32px;
+    }
+
     .sphere-container {
-        left: 0;
+        position: relative;
+        inset: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        top: auto;
+        height: 48vh;
+        min-height: 320px;
+        margin: 0;
+        border-radius: 28px;
+        background:
+            radial-gradient(circle at center, rgba(255, 255, 255, 0.06), transparent 52%),
+            linear-gradient(180deg, rgba(10, 10, 10, 0.96) 0%, rgba(4, 4, 4, 0.98) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        overflow: hidden;
     }
 
     .about-panel {
-        width: calc(100vw - 40px);
+        position: relative;
+        width: 100%;
         max-width: none;
-        left: 20px;
-        right: 20px;
+        left: auto;
+        right: auto;
         top: auto;
-        bottom: 20px;
+        bottom: auto;
         height: auto;
-        max-height: 45vh;
+        max-height: none;
+        margin: 20px 0 0;
+        opacity: 1 !important;
     }
 
     .about-panel-inner {
         border-radius: 20px;
-        padding: 24px;
+        padding: 22px 20px;
+        max-height: none;
+    }
+
+    .about-label,
+    .contact-kicker {
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+    }
+
+    .about-text,
+    .contact-link {
+        font-size: 0.94rem;
+    }
+
+    .scroll-space {
+        height: 80px;
+    }
+
+    #sphereCanvas {
+        pointer-events: none !important;
     }
 
     .cloud-popup-card {
