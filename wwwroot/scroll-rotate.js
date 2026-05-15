@@ -109,27 +109,42 @@
             ]
         },
         {
-            title: 'Contact',
-            text: 'Connect with me through GitHub, LinkedIn, or email.',
-            links: [
-                { href: 'https://github.com/rraattiii', label: 'GitHub' },
-                { href: 'https://www.linkedin.com/in/rati-kotchuashvili-3a98582a3/', label: 'LinkedIn' },
-                {
-                href: 'mailto:rati.rati2004@gmail.com?subject=Portfolio%20Contact',
-                label: 'Contact Me'
-                }
-            ],
-            labels: [
-                { label: 'GitHub', title: 'GitHub', text: 'My GitHub is the best place to see how I structure projects, experiment with ideas, and ship interface work.' },
-{
-  label: 'LinkedIn',
-  text: 'https://www.linkedin.com/in/rati-kotchuashvili-3a98582a3/',
-  href: 'https://www.linkedin.com/in/rati-kotchuashvili-3a98582a3/'
-},
-                { label: 'Email', title: 'Email', text: 'If you want to talk directly about a project, role, or collaboration, email is the fastest route.' },
-                { label: 'Contact', title: 'Contact', text: 'If the work resonates with you, I would love to hear from you and talk about what we can create.' }
-            ]
+    title: 'Contact',
+    text: 'Connect with me through GitHub, LinkedIn, or email.',
+    links: [
+        { href: 'https://github.com/rraattiii', label: 'GitHub' },
+        { href: 'https://www.linkedin.com/in/rati-kotchuashvili-3a98582a3/', label: 'LinkedIn' },
+        { href: 'mailto:rati.rati2004@gmail.com?subject=Portfolio%20Contact', label: 'Contact Me' },
+        { href: 'cv/Rati_Kotchuashvili_CV.pdf', label: 'Download My Resume', download: true }
+    ],
+    labels: [
+        { 
+            label: 'GitHub', 
+            title: 'GitHub', 
+            text: 'Follow my work on GitHub.', 
+            href: 'https://github.com/rraattiii' 
+
+        },
+        { 
+            label: 'LinkedIn', 
+            title: 'LinkedIn', 
+            text: 'Connect with me on LinkedIn.', 
+            href: 'https://www.linkedin.com/in/rati-kotchuashvili-3a98582a3/' 
+        },
+        { 
+            label: 'Email', 
+            title: 'Email', 
+            text: 'Send me an email.', 
+            href: 'mailto:rati.rati2004@gmail.com' 
+        },
+        { 
+            label: 'CV', 
+            title: 'Download CV', 
+            text: 'Click to view my resume.', 
+            href: 'cv/Rati_Kotchuashvili_CV.pdf' 
         }
+    ]
+}
     ];
 
     let sectionTitleElement = null;
@@ -524,57 +539,80 @@
     }
 
     function tryInit() {
-        canvas = document.getElementById('sphereCanvas');
-        sectionTitleElement = document.getElementById('sectionTitle');
-        sectionTextElement = document.getElementById('sectionText');
-        contactLinksElement = document.getElementById('contactLinks');
-        floatingHeaderElement = document.getElementById('floatingHeader');
-        popupElement = document.getElementById('cloudPopup');
-        popupTitleElement = document.getElementById('cloudPopupTitle');
-        popupTextElement = document.getElementById('cloudPopupText');
-        popupKickerElement = document.getElementById('cloudPopupKicker');
-        popupCloseElement = document.getElementById('cloudPopupClose');
+    // 1. Hook into all the HTML elements
+    canvas = document.getElementById('sphereCanvas');
+    sectionTitleElement = document.getElementById('sectionTitle');
+    sectionTextElement = document.getElementById('sectionText');
+    contactLinksElement = document.getElementById('contactLinks');
+    floatingHeaderElement = document.getElementById('floatingHeader');
+    popupElement = document.getElementById('cloudPopup');
+    popupTitleElement = document.getElementById('cloudPopupTitle');
+    popupTextElement = document.getElementById('cloudPopupText');
+    popupKickerElement = document.getElementById('cloudPopupKicker');
+    popupCloseElement = document.getElementById('cloudPopupClose');
 
-        if (!canvas || !sectionTitleElement || !sectionTextElement || !contactLinksElement || !floatingHeaderElement || !popupElement || !popupTitleElement || !popupTextElement || !popupKickerElement || !popupCloseElement) {
-            return false;
+    // 2. Safety check: If any element is missing, don't start (prevents errors)
+    if (!canvas || !sectionTitleElement || !sectionTextElement || !contactLinksElement || !floatingHeaderElement || !popupElement || !popupTitleElement || !popupTextElement || !popupKickerElement || !popupCloseElement) {
+        return false;
+    }
+
+    ctx = canvas.getContext('2d');
+    if (!ctx) {
+        return false;
+    }
+
+    // 3. Setup initial state
+    resizeCanvas();
+    createParticleCloud();
+    sectionTitleElement.classList.add('is-visible');
+    sectionTextElement.classList.add('is-visible');
+    contactLinksElement.classList.add('is-visible');
+    updateRotation();
+    initialized = true;
+
+    // 4. Popup Close Listeners
+    popupCloseElement.addEventListener('click', closePopup);
+    popupElement.addEventListener('click', event => {
+        if (event.target === popupElement) {
+            closePopup();
         }
+    });
 
-        ctx = canvas.getContext('2d');
-        if (!ctx) {
-            return false;
-        }
-
-        resizeCanvas();
-        createParticleCloud();
-        sectionTitleElement.classList.add('is-visible');
-        sectionTextElement.classList.add('is-visible');
-        contactLinksElement.classList.add('is-visible');
-        updateRotation();
-        initialized = true;
-        popupCloseElement.addEventListener('click', closePopup);
-        popupElement.addEventListener('click', event => {
-            if (event.target === popupElement) {
-                closePopup();
-            }
-        });
-        canvas.addEventListener('click', event => {
-            const label = findLabelAtPosition(event.clientX, event.clientY);
-            if (label) {
+    // 5. UPDATED: Logic to handle direct links or popups
+    canvas.addEventListener('click', event => {
+        const label = findLabelAtPosition(event.clientX, event.clientY);
+        if (label) {
+            // If the label data contains an 'href', open it in a new tab
+            if (label.href) {
+                window.open(label.href, '_blank');
+            } else {
+                // Otherwise, open the text info popup
                 openPopup(label);
             }
-        });
-        canvas.addEventListener('mousemove', event => {
-            const hoveredLabel = findLabelAtPosition(event.clientX, event.clientY);
-            hoveredLabelData = hoveredLabel;
-            canvas.classList.toggle('is-interactive', Boolean(hoveredLabel));
-        });
-        canvas.addEventListener('mouseleave', () => {
-            hoveredLabelData = null;
-            canvas.classList.remove('is-interactive');
-        });
-        requestAnimationFrame(animate);
-        return true;
-    }
+        }
+    });
+
+    // 6. UPDATED: Mouse move listener to show the hand/pointer cursor
+    canvas.addEventListener('mousemove', event => {
+        const hoveredLabel = findLabelAtPosition(event.clientX, event.clientY);
+        hoveredLabelData = hoveredLabel;
+        
+        // Change cursor to pointer (hand) if hovering over a button
+        canvas.style.cursor = hoveredLabel ? 'pointer' : 'default';
+        
+        canvas.classList.toggle('is-interactive', Boolean(hoveredLabel));
+    });
+
+    // 7. Reset cursor when mouse leaves the sphere area
+    canvas.addEventListener('mouseleave', () => {
+        hoveredLabelData = null;
+        canvas.style.cursor = 'default';
+        canvas.classList.remove('is-interactive');
+    });
+
+    requestAnimationFrame(animate);
+    return true;
+}
 
     const initInterval = setInterval(() => {
         if (tryInit()) {
