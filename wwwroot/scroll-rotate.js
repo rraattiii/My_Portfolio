@@ -27,6 +27,7 @@
     let popupTextElement = null;
     let popupKickerElement = null;
     let popupCloseElement = null;
+    let sphereBodyElement = null;
     let interactiveLabels = [];
     let hoveredLabelData = null;
     let hoverPause = 0;
@@ -157,6 +158,22 @@
     let currentDisplayLabels = sections[0].labels;
     let labelReveal = 0;
     let targetLabelReveal = 1;
+
+    function isCompactViewport() {
+        return window.innerWidth <= 768;
+    }
+
+    function getVisibleLabels(labels) {
+        if (!labels || labels.length === 0) {
+            return [];
+        }
+
+        if (!isCompactViewport()) {
+            return labels;
+        }
+
+        return labels.filter((_, index) => index % 2 === 0).slice(0, 3);
+    }
 
     function resizeCanvas() {
         devicePixelRatio = window.devicePixelRatio || 1;
@@ -304,7 +321,8 @@
     }
 
     function drawFloatingLabels(centerX, centerY) {
-        if (!currentDisplayLabels || currentDisplayLabels.length === 0) {
+        const labelsToRender = getVisibleLabels(currentDisplayLabels);
+        if (!labelsToRender || labelsToRender.length === 0) {
             return;
         }
 
@@ -314,16 +332,17 @@
         ctx.textBaseline = 'middle';
         interactiveLabels = [];
 
-        for (let i = 0; i < currentDisplayLabels.length; i++) {
-            const labelItem = currentDisplayLabels[i];
+        for (let i = 0; i < labelsToRender.length; i++) {
+            const labelItem = labelsToRender[i];
             const label = labelItem.label;
-            const angle = time * 1.1 + (Math.PI * 2 * i) / currentDisplayLabels.length;
-            const orbitX = Math.cos(angle) * (120 + i * 6);
-            const orbitY = Math.sin(angle * 1.35) * (72 + i * 4);
+            const angle = time * 1.1 + (Math.PI * 2 * i) / labelsToRender.length;
+            const compactScale = isCompactViewport() ? 0.78 : 1;
+            const orbitX = Math.cos(angle) * (120 + i * 6) * compactScale;
+            const orbitY = Math.sin(angle * 1.35) * (72 + i * 4) * compactScale;
             const depth = (Math.sin(angle) + 1) / 2;
             const scale = 0.78 + depth * 0.42;
             const alpha = (0.25 + depth * 0.55) * sphereOpacity * labelReveal;
-            const fontSize = Math.round(12 + depth * 8);
+            const fontSize = Math.round((isCompactViewport() ? 11 : 12) + depth * (isCompactViewport() ? 5 : 8));
 
             ctx.globalAlpha = alpha;
             ctx.shadowColor = 'rgba(0, 0, 0, 0.42)';
@@ -512,13 +531,19 @@
             return;
         }
 
-        const heroHeight = window.innerHeight;
         const currentScrollY = window.scrollY;
-        const scrollBelowHero = Math.max(0, window.scrollY - heroHeight);
-        const scrollPercentage = scrollBelowHero / window.innerHeight;
-        const isPanelMode = window.scrollY > heroHeight * 0.48;
-        const maxScroll = document.body.scrollHeight - window.innerHeight;
-        const fraction = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+        const sphereBodyTop = sphereBodyElement
+            ? sphereBodyElement.getBoundingClientRect().top + currentScrollY
+            : window.innerHeight * 2;
+        const sphereEntryOffset = window.innerHeight * (isCompactViewport() ? 0.82 : 0.65);
+        const sphereStart = Math.max(0, sphereBodyTop - sphereEntryOffset);
+        const scrollIntoSphere = Math.max(0, currentScrollY - sphereStart);
+        const sphereRange = sphereBodyElement
+            ? Math.max(window.innerHeight, sphereBodyElement.offsetHeight - window.innerHeight * 0.35)
+            : window.innerHeight;
+        const scrollPercentage = Math.min(1, scrollIntoSphere / window.innerHeight);
+        const isPanelMode = currentScrollY >= sphereStart;
+        const fraction = sphereRange > 0 ? Math.min(0.999, scrollIntoSphere / sphereRange) : 0;
         const sectionIndex = Math.min(Math.floor(fraction * sections.length), sections.length - 1);
         const scrollInfluence = Math.min(1, Math.max(0, scrollPercentage));
         const scrollDelta = currentScrollY - lastScrollY;
@@ -560,9 +585,10 @@
     popupTextElement = document.getElementById('cloudPopupText');
     popupKickerElement = document.getElementById('cloudPopupKicker');
     popupCloseElement = document.getElementById('cloudPopupClose');
+    sphereBodyElement = document.querySelector('.sphere-body');
 
     // 2. Safety check: If any element is missing, don't start (prevents errors)
-    if (!canvas || !sectionTitleElement || !sectionTextElement || !contactLinksElement || !floatingHeaderElement || !popupElement || !popupTitleElement || !popupTextElement || !popupKickerElement || !popupCloseElement) {
+    if (!canvas || !sectionTitleElement || !sectionTextElement || !contactLinksElement || !floatingHeaderElement || !popupElement || !popupTitleElement || !popupTextElement || !popupKickerElement || !popupCloseElement || !sphereBodyElement) {
         return false;
     }
 

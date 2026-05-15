@@ -17,11 +17,12 @@
 
 <body>
     <div id="app">
-        <svg class="loading-progress">
-            <circle r="40%" cx="50%" cy="50%" />
-            <circle r="40%" cx="50%" cy="50%" />
-        </svg>
-        <div class="loading-progress-text"></div>
+        <div class="loading-screen" role="status" aria-live="polite" aria-label="Loading portfolio">
+            <div class="loading-screen__mark">RK</div>
+            <div class="loading-screen__line"></div>
+            <p class="loading-screen__title">Rati Kotchuashvili</p>
+            <p class="loading-screen__text">Loading portfolio</p>
+        </div>
     </div>
 
     <div id="blazor-error-ui">
