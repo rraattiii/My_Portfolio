@@ -240,6 +240,7 @@ Program.cs
  microsoft.aspnetcore.components.webassembly/10.0.7/lib/net10.0/Microsoft.AspNetCore.Components.WebAssembly.dll
  microsoft.aspnetcore.components/10.0.7/lib/net10.0/Microsoft.AspNetCore.Components.dll
  microsoft.aspnetcore.metadata/10.0.7/lib/net10.0/Microsoft.AspNetCore.Metadata.dll
+ microsoft.dotnet.hotreload.webassembly.browser/10.0.203/lib/net10.0/Microsoft.DotNet.HotReload.WebAssembly.Browser.dll
  microsoft.extensions.configuration.abstractions/10.0.7/lib/net10.0/Microsoft.Extensions.Configuration.Abstractions.dll
  microsoft.extensions.configuration.binder/10.0.7/lib/net10.0/Microsoft.Extensions.Configuration.Binder.dll
  microsoft.extensions.configuration.fileextensions/10.0.7/lib/net10.0/Microsoft.Extensions.Configuration.FileExtensions.dll
