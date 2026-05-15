@@ -23,10 +23,17 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      - name: Find and Publish Blazor Project
+      - name: Find .csproj and Publish
         run: |
-          PROJECT=$(find . -name "*.csproj" | head -n 1)
-          echo "Found project: $PROJECT"
+          echo "🔍 Searching for .csproj file..."
+          PROJECT=$(find . -name "*.csproj" -type f | head -n 1)
+          if [ -z "$PROJECT" ]; then
+            echo "❌ No .csproj file found!"
+            ls -la
+            find . -name "*.csproj" || echo "Nothing found"
+            exit 1
+          fi
+          echo "✅ Found project: $PROJECT"
           dotnet publish "$PROJECT" -c Release -o build --nologo
 
       - name: Upload artifact
