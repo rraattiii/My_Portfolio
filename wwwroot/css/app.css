@@ -345,45 +345,91 @@ a {
     box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start; /* FIX: Pushes content top-down so margins work properly */
     border: 1px solid rgba(255, 255, 255, 0.07);
+    overflow-y: auto; /* FIX: Protects against tall content overflowing the UI */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
 }
+
+/* Custom Scrollbar for panel */
+.about-panel-inner::-webkit-scrollbar {
+    width: 4px;
+}
+.about-panel-inner::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
 
 .about-panel-content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    position: relative !important;
+}
+.about-panel-content .about-label,
+.about-panel-content .about-text,
+.about-panel-content .contact-links {
+    position: relative !important; 
+    top: auto !important;
+    left: auto !important;
+    transform: translateY(0) !important; 
+    margin: 0 !important;
 }
 
-.about-label {
-    display: none;
+/* FIX: Section headers styling for EDUCATION, CONTACT, etc. */
+.about-label, 
+.contact-kicker {
+    /* Note: If you still see TWO "EDUCATION" titles after this, change 
+       display to 'none !important' to hide the CSS one, OR delete the duplicate in your HTML file */
+    display: block !important; 
+    position: relative !important;
+    margin: 0 !important; /* Stripping margins to let 'gap' handle the spacing */
+    line-height: 1.2 !important;
+    height: auto !important; /* Prevents the element from collapsing to 0 height */
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #ffffff;
 }
 
+/* FIX: Description text styling & animation */
 .about-text {
-    margin: 0;
+    display: block !important;
+    position: relative !important;
+    margin: 0 0 16px 0 !important; 
+    height: auto !important;
     color: #bebebe;
     line-height: 1.7;
     font-size: 0.98rem;
+    
+    /* Animation */
     opacity: 0;
-    transform: translateY(22px);
-    transition: opacity 0.32s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateY(15px);
+    transition: opacity 0.5s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.about-text.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
+/* FIX: Links styling & staggered animation */
 .contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    position: relative !important;
+    margin: 0 !important;
+    
+    /* Animation */
     opacity: 0;
-    transform: translateY(22px);
-    transition: opacity 0.36s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateY(15px);
+    transition: opacity 0.5s ease 0.15s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
 }
 
-.contact-links.is-visible {
+/* FIX: Unified visibility triggers */
+.about-text.is-visible,
+.contact-links.is-visible,
+.is-visible .about-text,
+.is-visible .contact-links {
     opacity: 1;
     transform: translateY(0);
 }

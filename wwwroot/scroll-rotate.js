@@ -47,32 +47,58 @@
         },
         {
             title: 'Education',
-            text: 'Bachelor of Science in Computer Science with a focus on web development, interactive media, and UX design.',
+            text: 'International Black Sea University (IBSU). Bachelor’s Degree in Computer Science, 2022-present. My education built the technical foundation behind the interface work, from problem solving to software structure.',
             links: [],
             labels: [
-                { label: 'Computer Science', title: 'Computer Science', text: 'My education built the technical foundation behind the interface work, from problem solving to software structure.' },
-                { label: 'UX', title: 'User Experience', text: 'I studied how interaction, accessibility, and usability shape whether a product feels intuitive or frustrating.' },
-                { label: 'Interactive Media', title: 'Interactive Media', text: 'I am especially drawn to digital work that blends engineering with visual storytelling and engagement.' },
-                { label: 'Research', title: 'Research Mindset', text: 'Good product decisions come from curiosity, iteration, and understanding how people actually use what we build.' },
-                { label: 'Design', title: 'Design Thinking', text: 'Design is not decoration for me; it is part of how the product communicates, guides, and earns trust.' }
+                { 
+  label: 'Computer Science',
+  title: 'Computer Science',
+  text: 'Studied programming fundamentals, object-oriented programming, data structures, algorithms, and software development principles.'
+},
+
+{
+  label: 'Current Focus',
+  title: 'C# & .NET Development',
+  text: 'Currently studying C# and the .NET ecosystem, focusing on object-oriented programming, software development principles, and building practical applications.'
+},
+
+{ 
+  label: 'Relevant Coursework',
+  title: 'Relevant Coursework',
+  text: 'Object-Oriented Programming (C#), Data Structures and Algorithms, Database Management Systems, Software Engineering, Web Development, and User Interface Design.'
+},
+
+{ 
+  label: 'Projects',
+  title: 'Projects I Have Made',
+  text: 'Developed responsive web applications using Angular, PHP, HTML, and CSS. Built dynamic frontend components, worked with backend logic and client-server communication, and created academic software projects using C, C++, and C#.'
+},
             ]
         },
         {
             title: 'Skills',
-            text: 'JavaScript, C#, Blazor, HTML, CSS, responsive design, animation, and clean UI development.',
+            text: 'Software developer with experience in C#, .NET, Blazor, HTML, CSS, and JavaScript. Focused on building web applications and continuously improving backend and frontend development skills through academic and personal projects.”',
             links: [],
             labels: [
-                { label: 'Blazor', title: 'Blazor', text: 'I use Blazor to build interactive .NET-driven interfaces with a strong component structure and smooth client behavior.' },
                 { label: 'C#', title: 'C#', text: 'C# gives me the structure and clarity I like when building maintainable application logic and UI behavior.' },
                 { label: 'JavaScript', title: 'JavaScript', text: 'I rely on JavaScript when I want lower-level control over motion, canvas effects, and custom browser interactions.' },
                 { label: 'HTML', title: 'HTML Structure', text: 'Semantic structure matters because it improves accessibility, readability, and long-term maintainability.' },
                 { label: 'CSS', title: 'CSS Styling', text: 'I use CSS to shape layout, rhythm, motion, and visual identity instead of treating it like an afterthought.' },
-                { label: 'Responsive UI', title: 'Responsive UI', text: 'I design interfaces to adapt cleanly across screen sizes so the experience still feels intentional on mobile.' }
+                {
+                label: 'Tools & Platforms',
+                title: 'Tools & Platforms',
+                text: 'Git, GitHub, Visual Studio Code, Visual Studio'
+                },
+                {
+                label: 'Backend & Frameworks',
+                title: 'Backend & Frameworks',
+                text: 'C# .NET Core, ASP.NET MVC, ASP.NET Core, Entity Framework Core, Object-oriented programming, application architecture, backend logic'
+                },
             ]
         },
         {
             title: 'Experience',
-            text: 'I have created responsive applications and interactive visuals, delivering fast, polished products for digital audiences.',
+            text: 'IT Assistant — University Projects, 2023 – 2024 Assisted with technical and software-related university projects, Helped troubleshoot and solve technical issues Participated in development and testing of academic systems.           C# Developer (Self-Taught)',
             links: [],
             labels: [
                 { label: 'Products', title: 'Product Work', text: 'I focus on building interfaces that are not only visually strong, but also useful, stable, and production-minded.' },
@@ -86,15 +112,21 @@
             title: 'Contact',
             text: 'Connect with me through GitHub, LinkedIn, or email.',
             links: [
-                { href: 'https://github.com/yourusername', label: 'GitHub' },
-                { href: 'https://linkedin.com/in/yourname', label: 'LinkedIn' },
-                { href: 'mailto:hello@example.com', label: 'Email' }
+                { href: 'https://github.com/rraattiii', label: 'GitHub' },
+                { href: 'https://www.linkedin.com/in/rati-kotchuashvili-3a98582a3/', label: 'LinkedIn' },
+                {
+                href: 'mailto:rati.rati2004@gmail.com?subject=Portfolio%20Contact',
+                label: 'Contact Me'
+                }
             ],
             labels: [
                 { label: 'GitHub', title: 'GitHub', text: 'My GitHub is the best place to see how I structure projects, experiment with ideas, and ship interface work.' },
-                { label: 'LinkedIn', title: 'LinkedIn', text: 'LinkedIn is where you can connect with me professionally and follow what I am building next.' },
+{
+  label: 'LinkedIn',
+  text: 'https://www.linkedin.com/in/rati-kotchuashvili-3a98582a3/',
+  href: 'https://www.linkedin.com/in/rati-kotchuashvili-3a98582a3/'
+},
                 { label: 'Email', title: 'Email', text: 'If you want to talk directly about a project, role, or collaboration, email is the fastest route.' },
-                { label: 'Let’s Build', title: 'Let’s Build Something', text: 'I am interested in work that combines thoughtful design, strong frontend craft, and ambitious interaction.' },
                 { label: 'Contact', title: 'Contact', text: 'If the work resonates with you, I would love to hear from you and talk about what we can create.' }
             ]
         }
