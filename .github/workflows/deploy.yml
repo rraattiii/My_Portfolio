@@ -23,8 +23,11 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      - name: Publish Blazor WebAssembly
-        run: dotnet publish -c Release --nologo -o build
+      - name: Find and Publish Blazor Project
+        run: |
+          PROJECT=$(find . -name "*.csproj" | head -n 1)
+          echo "Found project: $PROJECT"
+          dotnet publish "$PROJECT" -c Release -o build --nologo
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
